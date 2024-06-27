@@ -3,7 +3,7 @@ import { IoWarning } from "react-icons/io5";
 
 const ErrorComponents = ({children}) => {
   return (
-    <div className=' text-red-600 flex justify-center items-center py-3 border shadow gap-x-5 my-5'>
+    <div className=' text-red-600 flex justify-center items-center py-3 border shadow gap-x-3 my-5'>
         <IoWarning />
         <h1>{children}</h1>
     </div>
