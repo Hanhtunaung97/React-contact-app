@@ -12,6 +12,7 @@ const RegisterPage = () => {
     password: "",
     password_confirmation: "",
   });
+ 
   const handleInputChange = (e) => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
@@ -62,7 +63,7 @@ const RegisterPage = () => {
             <ButtonComponents type="submit">Register</ButtonComponents>
           </form>
           <p className=" text-purple-500 font-heading">
-            You have already account ! plz login {" "}
+            You have already account ! plz login{" "}
             <button
               onClick={() => nav("/")}
               className=" underline active:underline-offset-4 duration-300 font-semibold active:scale-90"
