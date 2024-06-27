@@ -61,6 +61,15 @@ const RegisterPage = () => {
             />
             <ButtonComponents type="submit">Register</ButtonComponents>
           </form>
+          <p className=" text-purple-500 font-heading">
+            You have already account ! plz login {" "}
+            <button
+              onClick={() => nav("/")}
+              className=" underline active:underline-offset-4 duration-300 font-semibold active:scale-90"
+            >
+              Login
+            </button>
+          </p>
         </div>
       </div>
     </ContainerComponents>

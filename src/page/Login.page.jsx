@@ -4,8 +4,10 @@ import {
   ContainerComponents,
   InputFormComponents,
 } from "../components";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const nav = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const handleInputChange = (e) => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
@@ -40,6 +42,15 @@ const LoginPage = () => {
             />
             <ButtonComponents type="submit">Login</ButtonComponents>
           </form>
+          <p className=" text-purple-500 font-heading">
+            You haven't account yet ! plz sign up{" "}
+            <button
+              onClick={() => nav("/register")}
+              className=" underline active:underline-offset-4 duration-300 font-semibold active:scale-90"
+            >
+              Register
+            </button>
+          </p>
         </div>
       </div>
     </ContainerComponents>
