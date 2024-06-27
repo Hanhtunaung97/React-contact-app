@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PreventComponents = ({ children, go }) => {
+const PreventComponents = ({ children, go,check }) => {
   const nav = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem("auth")) {
+    if (check) {
       nav(go);
-    } else {
-      nav("/");
     }
   });
   return <div>{children}</div>;

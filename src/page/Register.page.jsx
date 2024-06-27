@@ -4,6 +4,7 @@ import {
   ContainerComponents,
   InputFormComponents,
   LoadingComponents,
+  PreventComponents,
 } from "../components";
 import { useNavigate } from "react-router-dom";
 import useApi from "../hook/useApi";
@@ -32,7 +33,8 @@ const RegisterPage = () => {
   };
   console.log(loading, error, data);
   return (
-    <ContainerComponents>
+   <PreventComponents go={"/home"} check={localStorage.getItem("auth")}>
+     <ContainerComponents>
       {loading ? (
         <LoadingComponents />
       ) : (
@@ -90,6 +92,7 @@ const RegisterPage = () => {
         </div>
       )}
     </ContainerComponents>
+   </PreventComponents>
   );
 };
 
