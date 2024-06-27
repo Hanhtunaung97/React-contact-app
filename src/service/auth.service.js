@@ -12,6 +12,10 @@ export const Register = async (regData) => {
 export const Login = async (loginData) => {
   try {
     const res = await api.post("/login", loginData);
+    const { data } = res;
+    if (data.token) {
+      localStorage.setItem("auth", data.token);
+    }
     return res;
   } catch (error) {
     return { error: true, msg: res.message };
