@@ -9,6 +9,7 @@ const useApi = (fun) => {
   const dealingApi = async (formData) => {
     setApiData((pre) => ({ ...pre, loading: true }));
     const res = await fun(formData);
+    console.log(res);
     if (res.error) {
       setApiData((pre) => ({ ...pre, loading: false, error: res.msg }));
     } else {

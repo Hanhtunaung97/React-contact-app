@@ -4,22 +4,29 @@ import {
   ContainerComponents,
   InputFormComponents,
 } from "../components";
+import { useNavigate } from "react-router-dom";
+import useApi from "../hook/useApi";
+import { Register } from "../service/auth.service";
 
 const RegisterPage = () => {
+  const {dealingApi,loading,error,data}=useApi(Register)
+  const nav=useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     password_confirmation: "",
   });
- 
+
   const handleInputChange = (e) => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
+    dealingApi(formData)
   };
+  console.log(loading,error,data);
   return (
     <ContainerComponents>
       <div className="Center">
