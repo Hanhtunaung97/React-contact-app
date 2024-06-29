@@ -18,7 +18,7 @@ const ContactAddPage = () => {
   return (
     <div className=" w-2/5 h-auto space-y-5">
       <h1 className=" font-heading text-xl md:text-3xl font-bold text-purple-700 text-center">
-        Register Your Contact
+        Create Your Contact
       </h1>
       <form onSubmit={handleSubmit} className=" flex flex-col gap-y-5">
         <InputFormComponents
@@ -53,7 +53,7 @@ const ContactAddPage = () => {
           label={"Address :"}
           placeholder="Your address"
         />
-        <ButtonComponents type="submit">Register</ButtonComponents>
+        <ButtonComponents type="submit">Create</ButtonComponents>
       </form>
     </div>
   );
