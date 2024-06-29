@@ -1,10 +1,11 @@
 import React from "react";
 import {
   ButtonComponents,
+  ContainerComponents,
   NavComponents,
   PreventComponents,
 } from "../components";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../store/action/auth.action";
 
@@ -17,11 +18,16 @@ const HomePage = () => {
     nav("/");
     logoutAction(dispatch);
   };
+  const handleAddNew = () => {
+    nav("/home/add");
+  };
   return (
     <PreventComponents go={"/"} check={!localStorage.getItem("auth")}>
       <NavComponents>
         <div className=" space-x-5">
-          <ButtonComponents style={"!w-auto"}>Add New</ButtonComponents>
+          <ButtonComponents onClick={handleAddNew} style={"!w-auto"}>
+            Add New
+          </ButtonComponents>
           <ButtonComponents
             onClick={handleLogout}
             style={
@@ -32,6 +38,11 @@ const HomePage = () => {
           </ButtonComponents>
         </div>
       </NavComponents>
+      <ContainerComponents>
+        <div className="Center">
+          <Outlet/>
+        </div>
+      </ContainerComponents>
     </PreventComponents>
   );
 };
