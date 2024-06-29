@@ -1,23 +1,27 @@
 import React from "react";
-import { ButtonComponents, PreventComponents } from "../components";
+import {
+  ButtonComponents,
+  NavComponents,
+  PreventComponents,
+} from "../components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../store/action/auth.action";
 
 const HomePage = () => {
-  const store=useSelector((store) =>store.auth )
-  const dispatch=useDispatch()
+  const store = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("auth");
     nav("/");
-    logoutAction(dispatch)
+    logoutAction(dispatch);
   };
   return (
     <PreventComponents go={"/"} check={!localStorage.getItem("auth")}>
-      <div>
-        HomePage
-        <div className="Center">
+      <NavComponents>
+        <div className=" space-x-5">
+          <ButtonComponents style={"!w-auto"}>Add New</ButtonComponents>
           <ButtonComponents
             onClick={handleLogout}
             style={
@@ -27,8 +31,8 @@ const HomePage = () => {
             Logout
           </ButtonComponents>
         </div>
-      </div>
-     </PreventComponents>
+      </NavComponents>
+    </PreventComponents>
   );
 };
 
