@@ -12,3 +12,24 @@ export const getContactData = async () => {
     return { error: true, msg: error.message };
   }
 };
+
+// export const getSingleContactData = async (id) => {
+//   try {
+//     const res = await api.get(`/contact${id}`);
+//     console.log(res);
+//   } catch (error) {
+//     return { error: true, msg: error.message };
+//   }
+// };
+
+export const addNewContact = async (newData) => {
+  try {
+    const res = await api.post("/contact", newData);
+    console.log(res);
+    if (res.data) {
+      return res.data.success;
+    }
+  } catch (error) {
+    return { error: true, msg: res.message };
+  }
+};
