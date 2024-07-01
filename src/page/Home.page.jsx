@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ButtonComponents,
   ContainerComponents,
@@ -8,6 +8,7 @@ import {
 import { Outlet, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../store/action/auth.action";
+import { getProfileData } from "../service/auth.service";
 
 const HomePage = () => {
   const store = useSelector((store) => store.auth);
@@ -21,6 +22,12 @@ const HomePage = () => {
   const handleAddNew = () => {
     nav("/home/add");
   };
+  useEffect(() => {
+   (async() => {
+    const res=await getProfileData();
+    console.log(res);
+   })() 
+  },[])
   return (
     <PreventComponents go={"/"} check={!localStorage.getItem("auth")}>
       <NavComponents>
