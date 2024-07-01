@@ -25,7 +25,7 @@ const HomePage = () => {
   useEffect(() => {
    (async() => {
     const res=await getProfileData();
-    console.log(res);
+    // console.log(res);
    })() 
   },[])
   return (
