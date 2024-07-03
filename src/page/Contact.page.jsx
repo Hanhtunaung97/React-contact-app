@@ -22,11 +22,11 @@ const ContactPage = () => {
     })();
   }, []);
   return (
-    <div className=" w-full">
+    <div className=" w-full h-full">
       {items.loading ? (
         <LoadingComponents />
       ) : (
-        <div className="flex flex-col gap-y-5">
+        <div className="flex flex-col gap-y-5 w-full h-full justify-center items-center">
           {items.error ? (
             <ErrorComponents>{items.error}</ErrorComponents>
           ) : (

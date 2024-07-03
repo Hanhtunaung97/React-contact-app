@@ -30,7 +30,8 @@ const HomePage = () => {
   },[])
   return (
     <PreventComponents go={"/"} check={!localStorage.getItem("auth")}>
-      <NavComponents>
+     <div className=" h-full">
+     <NavComponents>
         <div className=" space-x-5">
           <ButtonComponents onClick={handleAddNew} style={"!w-auto"}>
             Add New
@@ -50,6 +51,7 @@ const HomePage = () => {
           <Outlet/>
         </div>
       </ContainerComponents>
+     </div>
     </PreventComponents>
   );
 };
