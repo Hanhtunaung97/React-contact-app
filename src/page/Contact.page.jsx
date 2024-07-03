@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getContactData } from "../service/contact.service";
+import { deleteContactData, getContactData } from "../service/contact.service";
 import { ContactCardComponents, LoadingComponents } from "../components";
 import ErrorComponents from "../components/Error.components";
 
@@ -9,6 +9,7 @@ const ContactPage = () => {
     data: null,
     error: null,
   });
+  const [deleteItem, setDeleteItem] = useState(false);
   useEffect(() => {
     (async () => {
       setItems((pre) => ({ ...pre, loading: true }));
@@ -20,7 +21,14 @@ const ContactPage = () => {
         setItems((pre) => ({ ...pre, loading: false, error: res.msg }));
       }
     })();
-  }, []);
+  }, [deleteItem]);
+  const deleteContact = async (id) => {
+    console.log("delete id", id);
+    const res = await deleteContactData(id);
+    if (res) {
+      setDeleteItem((pre) => !pre);
+    }
+  };
   return (
     <div className=" w-full h-full">
       {items.loading ? (
@@ -31,7 +39,11 @@ const ContactPage = () => {
             <ErrorComponents>{items.error}</ErrorComponents>
           ) : (
             items.data.map((el) => (
-              <ContactCardComponents key={el.id} data={el} />
+              <ContactCardComponents
+                deleteContact={deleteContact}
+                key={el.id}
+                data={el}
+              />
             ))
           )}
         </div>

@@ -49,3 +49,15 @@ export const updateContact = async (id, putData) => {
     return { error: true, msg: error.message };
   }
 };
+
+export const deleteContactData = async (id) => {
+  try {
+    const res = await api.delete(`/contact/${id}`);
+    console.log(res);
+    if (res.data) {
+      return res.data.success;
+    }
+  } catch (error) {
+    return { error: true, msg: error.message };
+  }
+};
