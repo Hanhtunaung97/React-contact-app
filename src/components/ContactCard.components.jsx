@@ -8,6 +8,10 @@ const ContactCardComponents = ({ data }) => {
   const handleRedirect = () => {
     nav(`/home/contact/${data.id}`);
   };
+  const handleEdit = () => {
+    console.log("edit id", data.id);
+    nav("/home/add", { state: { edit: true, data, id: data.id } });
+  };
   return (
     <div className=" w-full shadow p-4 hover:bg-white hover:text-purple-500 hover:border-purple-400 flex items-center justify-between">
       <ButtonComponents
@@ -21,6 +25,7 @@ const ContactCardComponents = ({ data }) => {
       </ButtonComponents>
       <div className="flex items-center gap-x-3">
         <ButtonComponents
+          onClick={handleEdit}
           style={
             "!group w-auto duration-200 bg-purple-50  active:bg-purple-400  hover:bg-white hover:border-purple-400 group"
           }

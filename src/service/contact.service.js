@@ -37,3 +37,15 @@ export const addNewContact = async (newData) => {
     return { error: true, msg: res.message };
   }
 };
+
+export const updateContact = async (id, putData) => {
+  try {
+    const res = await api.put(`/contact/${id}`, putData);
+    console.log(res);
+    if (res.data) {
+      return res.data.success;
+    }
+  } catch (error) {
+    return { error: true, msg: error.message };
+  }
+};

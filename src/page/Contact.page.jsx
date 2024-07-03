@@ -13,7 +13,7 @@ const ContactPage = () => {
     (async () => {
       setItems((pre) => ({ ...pre, loading: true }));
       const res = await getContactData();
-      console.log(res);
+      // console.log(res);
       if (res) {
         setItems((pre) => ({ ...pre, loading: false, data: res }));
       } else {
