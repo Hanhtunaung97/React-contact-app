@@ -20,7 +20,7 @@ const ContactCardComponents = ({ data, deleteContact }) => {
       <ButtonComponents
         onClick={handleRedirect}
         style={
-          "!w-1/2 bg-purple-400  mx-0 hover:bg-white hover:text-purple-400 hover:border-purple-300 "
+          "!w-1/2 bg-purple-400  mx-0 hover:bg-white hover:text-purple-500 hover:border-purple-300 "
         }
       >
         <h1 className=" font-heading font-semibold">{data.name}</h1>
@@ -30,18 +30,18 @@ const ContactCardComponents = ({ data, deleteContact }) => {
         <ButtonComponents
           onClick={handleEdit}
           style={
-            "!group w-auto duration-200 bg-purple-100  active:bg-purple-400  hover:bg-white hover:border-purple-400 group"
+            "!group w-auto duration-200 bg-purple-100  active:bg-purple-400  hover:bg-purple-50 hover:border-purple-400 group"
           }
         >
-          <CiEdit className=" stroke-purple-500 stroke-2 group-active:stroke-purple-50 " />
+          <CiEdit className=" stroke-purple-50 stroke-2 group-hover:stroke-purple-500" />
         </ButtonComponents>
         <ButtonComponents
           onClick={handleDelete}
           style={
-            "!group w-auto duration-200 bg-purple-100  active:bg-purple-400  hover:bg-white hover:border-purple-400 group"
+            "!group w-auto duration-200 bg-purple-100  active:bg-purple-400  hover:bg-purple-50 hover:border-purple-400 group"
           }
         >
-          <CiTrash className=" stroke-purple-500 stroke-2 group-active:stroke-purple-50" />
+          <CiTrash className=" stroke-purple-50 stroke-2 group-hover:stroke-purple-500" />
         </ButtonComponents>
       </div>
     </div>

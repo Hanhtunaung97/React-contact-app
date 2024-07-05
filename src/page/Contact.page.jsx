@@ -38,7 +38,7 @@ const ContactPage = () => {
           {items.error ? (
             <ErrorComponents>{items.error}</ErrorComponents>
           ) : (
-            items.data.map((el) => (
+            items.data?.map((el) => (
               <ContactCardComponents
                 deleteContact={deleteContact}
                 key={el.id}
