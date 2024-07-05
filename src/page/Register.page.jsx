@@ -10,9 +10,13 @@ import { useNavigate } from "react-router-dom";
 import useApi from "../hook/useApi";
 import { Register } from "../service/auth.service";
 import ErrorComponents from "../components/Error.components";
+import { useDispatch, useSelector } from "react-redux";
+import { issue, processing, register } from "../store/slice/auth.slice";
 
 const RegisterPage = () => {
-  const { dealingApi, loading, error, data } = useApi(Register);
+  // const { dealingApi, loading, error, data } = useApi(Register);
+  const { loading, error, data, auth } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -26,12 +30,18 @@ const RegisterPage = () => {
   const handleInputChange = (e) => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(processing());
+    if (res.data) {
+      dispatch(register(res.data));
+    } else {
+      dispatch(issue(res.msg));
+    }
     // console.log(formData);
-    dealingApi(formData);
+    // dealingApi(formData);
   };
-  console.log({ loading, error, data});
+  console.log({ loading, error, data });
   return (
     <PreventComponents go={"/home"} check={localStorage.getItem("auth")}>
       <ContainerComponents>
