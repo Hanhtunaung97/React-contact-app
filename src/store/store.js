@@ -4,6 +4,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import authSlice from "./slice/auth.slice";
+import contactSlice from "./slice/contact.slice";
 
 // const reducer = combineReducers({
 //   auth: authReducer,
@@ -14,5 +15,6 @@ import authSlice from "./slice/auth.slice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
+    contact: contactSlice,
   },
 });
