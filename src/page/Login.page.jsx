@@ -12,10 +12,11 @@ import { Login } from "../service/auth.service";
 import ErrorComponents from "../components/Error.components";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../store/action/auth.action";
+import { issue, login, processing } from "../store/slice/auth.slice";
 
 const LoginPage = () => {
   const { loading, data, error, auth } = useSelector((store) => store.auth);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   // const { dealingApi, loading, error, data } = useApi(Login);
   const nav = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -23,9 +24,16 @@ const LoginPage = () => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
   console.log({ loading, data, error, auth });
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginAction(dispatch,formData)
+    dispatch(processing());
+    const res = await Login(formData);
+    if (res.data) {
+      dispatch(login(res.data));
+    } else {
+      dispatch(issue(res.msg));
+    }
+    // loginAction(dispatch,formData)
     // dealingApi(formData);
     // console.log(formData);
   };
