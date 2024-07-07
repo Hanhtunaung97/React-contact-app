@@ -1,7 +1,10 @@
 // import { deleteContactData, getContactData } from "../service/contact.service";
 import { useEffect, useState } from "react";
-import { ContactCardComponents, LoadingComponents } from "../components";
-import ErrorComponents from "../components/Error.components";
+import {
+  ContactCardComponents,
+  LoadingComponents,
+  ErrorComponents,
+} from "../components";
 import {
   useGetContactsQuery,
   useRemoveContactMutation,

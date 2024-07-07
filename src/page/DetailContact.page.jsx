@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleContactData } from "../service/contact.service";
-import { LoadingComponents } from "../components";
-import ErrorComponents from "../components/Error.components";
+import { LoadingComponents, ErrorComponents } from "../components";
 import { useGetOneContactQuery } from "../store/services/endpoints/contact.endpoints";
+// import { getSingleContactData } from "../service/contact.service";
 
 const DetailContactPage = () => {
   const { id } = useParams();
@@ -37,7 +36,9 @@ const DetailContactPage = () => {
             <ErrorComponents>{isError.message}</ErrorComponents>
           ) : (
             <div className=" text-center border shadow w-2/3 p-3 rounded-lg space-y-3 text-purple-500 duration-300 hover:scale-110 hover:bg-purple-50 hover:border-0">
-              <h1 className=" font-heading font-semibold">{data.contact.name}</h1>
+              <h1 className=" font-heading font-semibold">
+                {data.contact.name}
+              </h1>
               <p>{data.contact.phone}</p>
               <p>{data.contact.email}</p>
               <p>{data.contact.address}</p>

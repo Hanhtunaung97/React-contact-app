@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import {
   ButtonComponents,
   ContainerComponents,
+  ErrorComponents,
   InputFormComponents,
   LoadingComponents,
   PreventComponents,
 } from "../components";
 import { useNavigate } from "react-router-dom";
-import ErrorComponents from "../components/Error.components";
 import { useRegisterMutation } from "../store/services/endpoints/auth.endpoints";
 // import useApi from "../hook/useApi";
 // import { Register } from "../service/auth.service";
