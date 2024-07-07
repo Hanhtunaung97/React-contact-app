@@ -7,32 +7,39 @@ import {
   PreventComponents,
 } from "../components";
 import { useNavigate } from "react-router-dom";
-import useApi from "../hook/useApi";
-import { Login } from "../service/auth.service";
 import ErrorComponents from "../components/Error.components";
-import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../store/action/auth.action";
-import { issue, login, processing } from "../store/slice/auth.slice";
+import { useLoginMutation } from "../store/services/endpoints/auth.endpoints";
+// import useApi from "../hook/useApi";
+// import { Login } from "../service/auth.service";
+// import { useDispatch, useSelector } from "react-redux";
+// import { loginAction } from "../store/action/auth.action";
+// import { issue, login, processing } from "../store/slice/auth.slice";
 
 const LoginPage = () => {
-  const { loading, data, error, auth } = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
+  const [loginFun, { isLoading, isError, data, isSuccess }] =
+    useLoginMutation();
+  console.log(isLoading, isError, data, isSuccess);
+  // const { loading, data, error, auth } = useSelector((store) => store.auth);
+  // const dispatch = useDispatch();
   // const { dealingApi, loading, error, data } = useApi(Login);
   const nav = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const handleInputChange = (e) => {
     setFormData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
-  console.log({ loading, data, error, auth });
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(processing());
-    const res = await Login(formData);
-    if (res.data) {
-      dispatch(login(res.data));
-    } else {
-      dispatch(issue(res.msg));
+    const res = await loginFun(formData);
+    if (res) {
+      localStorage.setItem("auth", JSON.stringify(res.data.token));
     }
+    // dispatch(processing());
+    // const res = await Login(formData);
+    // if (res.data) {
+    //   dispatch(login(res.data));
+    // } else {
+    //   dispatch(issue(res.msg));
+    // }
     // loginAction(dispatch,formData)
     // dealingApi(formData);
     // console.log(formData);
@@ -44,7 +51,7 @@ const LoginPage = () => {
   return (
     <PreventComponents go={"/home"} check={localStorage.getItem("auth")}>
       <ContainerComponents>
-        {loading ? (
+        {isLoading ? (
           <LoadingComponents />
         ) : (
           <div className="Center">
@@ -52,7 +59,7 @@ const LoginPage = () => {
               <h1 className=" text-purple-500 font-bold text-xl md:text-3xl font-heading text-center">
                 Login Your Contact
               </h1>
-              {error && <ErrorComponents>{error}</ErrorComponents>}
+              {isError && <ErrorComponents>{isError.message}</ErrorComponents>}
               <form onSubmit={handleSubmit} className=" flex flex-col gap-y-5">
                 <InputFormComponents
                   onChange={handleInputChange}

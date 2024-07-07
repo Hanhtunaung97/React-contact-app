@@ -7,17 +7,21 @@ import {
   PreventComponents,
 } from "../components";
 import { useNavigate } from "react-router-dom";
-import useApi from "../hook/useApi";
-import { Register } from "../service/auth.service";
 import ErrorComponents from "../components/Error.components";
-import { useDispatch, useSelector } from "react-redux";
-import { issue, processing, register } from "../store/slice/auth.slice";
+import { useRegisterMutation } from "../store/services/endpoints/auth.endpoints";
+// import useApi from "../hook/useApi";
+// import { Register } from "../service/auth.service";
+// import { useDispatch, useSelector } from "react-redux";
+// import { issue, processing, register } from "../store/slice/auth.slice";
 
 const RegisterPage = () => {
-  // const { dealingApi, loading, error, data } = useApi(Register);
-  const { loading, error, data, auth } = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
+  const [regFun, { isLoading, isError, data, isSuccess }] =
+    useRegisterMutation();
   const nav = useNavigate();
+  console.log(isLoading, isError, data, isSuccess);
+  // const { dealingApi, loading, error, data } = useApi(Register);
+  // const { loading, error, data, auth } = useSelector((store) => store.auth);
+  // const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,20 +36,20 @@ const RegisterPage = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(processing());
-    if (res.data) {
-      dispatch(register(res.data));
-    } else {
-      dispatch(issue(res.msg));
-    }
+    await regFun(formData);
+    // dispatch(processing());
+    // if (res.data) {
+    //   dispatch(register(res.data));
+    // } else {
+    //   dispatch(issue(res.msg));
+    // }
     // console.log(formData);
     // dealingApi(formData);
   };
-  console.log({ loading, error, data });
   return (
     <PreventComponents go={"/home"} check={localStorage.getItem("auth")}>
       <ContainerComponents>
-        {loading ? (
+        {isLoading ? (
           <LoadingComponents />
         ) : (
           <div className="Center">
@@ -53,7 +57,7 @@ const RegisterPage = () => {
               <h1 className=" font-heading text-xl md:text-3xl font-bold text-purple-700 text-center">
                 Register Your Contact
               </h1>
-              {error && <ErrorComponents>{error}</ErrorComponents>}
+              {isError && <ErrorComponents>{isError.message}</ErrorComponents>}
               <form onSubmit={handleSubmit} className=" flex flex-col gap-y-5">
                 <InputFormComponents
                   onChange={handleInputChange}

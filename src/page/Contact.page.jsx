@@ -1,5 +1,5 @@
-// import React, { useEffect, useState } from "react";
 // import { deleteContactData, getContactData } from "../service/contact.service";
+import { useEffect, useState } from "react";
 import { ContactCardComponents, LoadingComponents } from "../components";
 import ErrorComponents from "../components/Error.components";
 import {
@@ -11,13 +11,13 @@ const ContactPage = () => {
   const { isLoading, isError, data, isSuccess } = useGetContactsQuery();
   console.log(isLoading, isError, data, isSuccess);
   const [deleteFun, deleteData] = useRemoveContactMutation();
+  const [deleteItem, setDeleteItem] = useState(false);
   // console.log(deleteData);
   // const [items, setItems] = useState({
   //   loading: true,
   //   data: null,
   //   error: null,
   // });
-  // const [deleteItem, setDeleteItem] = useState(false);
   // useEffect(() => {
   //   (async () => {
   //     setItems((pre) => ({ ...pre, loading: true }));
@@ -30,11 +30,16 @@ const ContactPage = () => {
   //     }
   //   })();
   // }, [deleteItem]);
+  useEffect(() => {
+    (async () => {
+      const res = await data;
+    })();
+  }, [data, deleteItem]);
   const deleteContact = async (id) => {
     console.log("delete id", id);
     const res = await deleteFun(id);
     if (res) {
-      // setDeleteItem((pre) => !pre);
+      setDeleteItem((pre) => !pre);
     }
   };
   return (

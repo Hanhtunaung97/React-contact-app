@@ -8,10 +8,10 @@ import {
 } from "../store/services/endpoints/contact.endpoints";
 
 const ContactAddPage = () => {
-  const [addFun, postData] =
-    useAddContactMutation();
-    const [editFun, { isError, isLoading, data, isSuccess }] = useEditContactMutation();
-    console.log(isError, isLoading, data, isSuccess);
+  const [addFun, postData] = useAddContactMutation();
+  const [editFun, { isError, isLoading, data, isSuccess }] =
+    useEditContactMutation();
+  console.log(isError, isLoading, data, isSuccess);
   const nav = useNavigate();
   const location = useLocation();
   // console.log(location);
@@ -47,7 +47,7 @@ const ContactAddPage = () => {
   return (
     <div className=" w-2/5 h-auto space-y-5">
       <h1 className=" font-heading text-xl md:text-3xl font-bold text-purple-700 text-center">
-        Create Your Contact
+        {location.state?.edit ? "Edit Your Contact" : "Create Your Contact"}
       </h1>
       <form onSubmit={handleSubmit} className=" flex flex-col gap-y-5">
         <InputFormComponents
@@ -82,7 +82,9 @@ const ContactAddPage = () => {
           label={"Address :"}
           placeholder="Your address"
         />
-        <ButtonComponents type="submit">Create</ButtonComponents>
+        <ButtonComponents type="submit">
+          {location.state?.edit ? "Edit" : "Create"}
+        </ButtonComponents>
       </form>
     </div>
   );
