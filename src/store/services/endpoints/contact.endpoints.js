@@ -7,12 +7,14 @@ const contactEndpoints = apiService.injectEndpoints({
         url: `/contact`,
         method: "GET",
       }),
+      providesTags: "contact",
     }),
     getOneContact: builder.query({
       query: (id) => ({
         url: `/contact/${id}`,
         method: "GET",
       }),
+      invalidatesTags: "contact",
     }),
     addContact: builder.mutation({
       query: (formData) => ({
@@ -20,6 +22,7 @@ const contactEndpoints = apiService.injectEndpoints({
         method: "POST",
         body: formData,
       }),
+      invalidatesTags: "contact",
     }),
     editContact: builder.mutation({
       query: (id, formData) => ({
@@ -27,12 +30,14 @@ const contactEndpoints = apiService.injectEndpoints({
         method: "PUT",
         body: formData,
       }),
+      invalidatesTags: "contact",
     }),
     removeContact: builder.mutation({
       query: (id) => ({
         url: `/contact/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: "contact",
     }),
   }),
 });

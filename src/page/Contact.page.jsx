@@ -11,7 +11,8 @@ import {
 } from "../store/services/endpoints/contact.endpoints";
 
 const ContactPage = () => {
-  const { isLoading, isError, data, isSuccess } = useGetContactsQuery();
+  const { isLoading, isError, data, isSuccess, refetch } =
+    useGetContactsQuery();
   console.log(isLoading, isError, data, isSuccess);
   const [deleteFun, deleteData] = useRemoveContactMutation();
   const [deleteItem, setDeleteItem] = useState(false);
@@ -35,7 +36,7 @@ const ContactPage = () => {
   // }, [deleteItem]);
   useEffect(() => {
     (async () => {
-      const res = await data;
+       refetch();
     })();
   }, [data, deleteItem]);
   const deleteContact = async (id) => {
