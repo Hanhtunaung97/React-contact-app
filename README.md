@@ -1,9 +1,8 @@
 # This is my react-redux-contact-app with Real API integrating using TailwindCSS
 
 This app is using redux third-party library and so other useful libraries.This app also aims to show authentication and authorization process dealing with real back-end api data.You can test register,login,contact and so other option in this app.
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## <a name="tech-stack">⚙️ Tech Stack</a>
+## <a>⚙️ Tech Stack</a>
 
 - React.js
 - Redux
